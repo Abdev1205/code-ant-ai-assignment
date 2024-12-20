@@ -6,7 +6,7 @@ import AuthLayout from "@/layout/AppLayout";
 const AuthMiddleware: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { isSignedIn, isLoaded, session } = useSession();
+  const { isSignedIn, isLoaded } = useSession();
   const navigate = useNavigate();
 
   useEffect(() => {
