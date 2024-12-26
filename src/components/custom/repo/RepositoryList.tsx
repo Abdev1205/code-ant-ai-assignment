@@ -1,11 +1,22 @@
 import { Card } from "@/components/ui/card";
 import SearchBar from "../search/SearchBar";
 import { HiOutlineRefresh } from "react-icons/hi";
-import { repoData } from "@/constants/repoData";
 import { IoMdAdd } from "react-icons/io";
 import { GoDatabase } from "react-icons/go";
+import useRepo from "@/hooks/useRepo";
 
 const RepositoryList = () => {
+  const { loading, repos } = useRepo();
+  console.log("repository list", repos);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-lg font-medium">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center w-full h-full bg-gray-100 ">
       <div className="lg:w-[calc(100%-2rem)] w-full lg:h-[calc(100vh-2rem)] h-[calc(100vh-2rem)]  mx-auto bg-white rounded-[.5rem] border ">
@@ -16,7 +27,7 @@ const RepositoryList = () => {
                 Repositories
               </h2>
               <p className=" text-[.8rem] opacity-80 font-openSans font-[500] ">
-                {repoData.length + " total repositories"}
+                {repos.length + " total repositories"}
               </p>
               <div className="lg:hidden flex gap-[1rem] h-fit lg:mt-0 mt-[.3rem]  ">
                 <button className="flex items-center justify-center gap-[.2rem] px-[1rem] py-[.3rem] border-2 rounded-[.5rem] ">
@@ -43,7 +54,7 @@ const RepositoryList = () => {
           </div>
         </div>
         <div className=" lg:h-[calc(100vh-11rem)] h-[calc(100vh-15rem)] overflow-y-auto w-full ">
-          {repoData.map((repo, index) => (
+          {repos.map((repo, index) => (
             <Card
               key={index}
               className="flex items-center justify-between sm:p-6 p-4 border-b rounded-none hover:bg-[#F5F5F5] cursor-pointer "
@@ -65,7 +76,9 @@ const RepositoryList = () => {
                   <span className="flex items-center gap-[3px] ">
                     <GoDatabase /> {repo.size}
                   </span>
-                  <span>Updated {repo.updated}</span>
+                  <span>
+                    Updated {new Date(repo.updated_at).toLocaleDateString()}
+                  </span>
                 </span>
               </div>
             </Card>
