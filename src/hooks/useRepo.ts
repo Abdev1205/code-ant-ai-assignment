@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "@clerk/clerk-react";
 
-interface Repository {
+export interface Repository {
   name: string;
   visibility: string;
   language: string;
