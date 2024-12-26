@@ -35,15 +35,14 @@ const SignInPage = () => {
     if (!isLoaded) return;
     try {
       await signIn.authenticateWithRedirect({
-        strategy: provider, // No casting is needed now
-        redirectUrl: "/", // Adjust as per your needs
+        strategy: provider,
+        redirectUrl: "/sso-callback",
         redirectUrlComplete: "/",
       });
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
   };
-
   return (
     <div className="flex h-[100vh] justify-center items-center bg-[#FAFAFA] ">
       <div className=" bg-white h-full lg:w-[50%] lg:flex hidden items-center justify-center relative ">

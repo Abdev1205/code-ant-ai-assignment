@@ -5,6 +5,7 @@ import SignInPage from "./(auth)/SignInPage";
 import SignUpPage from "./(auth)/SignUpPage";
 import AuthMiddleware from "./middleware/AuthMiddleware";
 import UnderConstruction from "./pages/UnderConstruction";
+import SSOCallback from "./(auth)/SSOCallback";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
     element: (
       <ConfigProvider>
         <SignUpPage />
+      </ConfigProvider>
+    ),
+  },
+  {
+    path: "/sso-callback",
+    element: (
+      <ConfigProvider>
+        <SSOCallback />
       </ConfigProvider>
     ),
   },
